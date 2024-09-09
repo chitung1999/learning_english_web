@@ -3,7 +3,7 @@ import 'import_app.dart';
 class NotifyDialog extends StatefulWidget {
   const NotifyDialog({super.key, required this.message});
 
-  final MessageApp message;
+  final StatusApp message;
 
   @override
   _NotifyDialogState createState() => _NotifyDialogState();

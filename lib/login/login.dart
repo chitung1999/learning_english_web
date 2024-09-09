@@ -1,4 +1,5 @@
 import '../component/import_app.dart';
+import '../model/database.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key, required this.onLogin});
@@ -71,11 +72,11 @@ class _LoginState extends State<Login> {
                           title: 'Contact',
                           onPressed: () {
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return const NotifyDialog(
-                                      message: MessageApp.contactAccount);
-                                });
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const NotifyDialog(message: StatusApp.contactAccount);
+                              }
+                            );
                           },
                         ),
                       ],
@@ -86,8 +87,28 @@ class _LoginState extends State<Login> {
                         width: 300,
                         height: 50,
                         textSize: 25,
-                        onPressed: () {
-                          widget.onLogin();
+                        onPressed: () async {
+                          if(_username.text.isEmpty || _password.text.isEmpty) {
+                            ConfigApp.showNotify(context, MessageType.notice, StatusApp.blankAccount);
+                            return;
+                          }
+
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return const WaitingProgress();
+                              }
+                          );
+
+                          StatusApp ret = await database.login(_username.text, _password.text);
+                          if(ret == StatusApp.success) {
+                            widget.onLogin();
+                          } else {
+                            ConfigApp.showNotify(context, MessageType.notice, ret);
+                          }
+
+                          Navigator.of(context).pop();
                         }),
                     const SizedBox(height: 50),
                     const Text('or login with',
@@ -101,7 +122,7 @@ class _LoginState extends State<Login> {
                             size: 70,
                             onPressed: () {
                               ConfigApp.showNotify(context, MessageType.notice,
-                                  MessageApp.newFeaturePornhub);
+                                  StatusApp.newFeaturePornhub);
                             }),
                         const SizedBox(height: 30),
                         ImageButtonApp(
@@ -109,7 +130,7 @@ class _LoginState extends State<Login> {
                             size: 70,
                             onPressed: () {
                               ConfigApp.showNotify(context, MessageType.notice,
-                                  MessageApp.newFeature);
+                                  StatusApp.newFeature);
                             }),
                         const SizedBox(height: 30),
                         ImageButtonApp(
@@ -117,7 +138,7 @@ class _LoginState extends State<Login> {
                             size: 70,
                             onPressed: () {
                               ConfigApp.showNotify(context, MessageType.notice,
-                                  MessageApp.newFeature);
+                                  StatusApp.newFeature);
                             }),
                         const SizedBox(height: 30)
                       ],
