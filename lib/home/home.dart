@@ -1,4 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:source_dictionary_web/home/word/word_tab.dart';
 import '../../component/import_app.dart';
 
 class Home extends StatefulWidget {
@@ -47,7 +48,7 @@ class _HomeState extends State<Home> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          Container(),
+          const WordTab(),
           Container(),
           Container(),
           Container(),

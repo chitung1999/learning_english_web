@@ -25,20 +25,15 @@ class Database {
 
   Future<StatusApp> connect() async {
     try {
-      print('AAAAAAAAAAAAAAAAA');
       _db = await Db.create(MONGO_URL).timeout(const Duration(seconds: 10), onTimeout: () {
         throw TimeoutException('Connection to MongoDB timed out');
       });
-      print('FF');
       await _db.open().timeout(const Duration(seconds: 10), onTimeout: () {
         throw TimeoutException('Connection to MongoDB timed out');
       });
-      print('EE');
       collection = _db.collection( );
       return StatusApp.success;
     } catch(e) {
-      print(e);
-      print('CCCCCCCCCCCCCCCC');
       return StatusApp.connectError;
     }
   }

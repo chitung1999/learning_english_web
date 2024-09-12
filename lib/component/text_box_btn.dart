@@ -6,6 +6,8 @@ class TextBoxButtonApp extends StatefulWidget {
       required this.title,
       required this.width,
       required this.height,
+      this.radius = 0,
+      this.outlineColor = Colors.blueGrey,
       this.bgColor = Colors.blueGrey,
       this.textSize = 15,
       this.textColor = Colors.white,
@@ -14,6 +16,8 @@ class TextBoxButtonApp extends StatefulWidget {
   final String title;
   final double width;
   final double height;
+  final double radius;
+  final Color outlineColor;
   final Color bgColor;
   final double textSize;
   final Color textColor;
@@ -33,7 +37,14 @@ class _TextBoxButtonAppState extends State<TextBoxButtonApp> {
           onPressed: () {
             widget.onPressed();
           },
-          style: ElevatedButton.styleFrom(backgroundColor: widget.bgColor),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: widget.bgColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(widget.radius),
+                side: BorderSide(
+                  color: widget.outlineColor, // Màu của outline
+                ),
+              )),
           child: Text(widget.title,
               style: TextStyle(
                   fontWeight: FontWeight.bold,

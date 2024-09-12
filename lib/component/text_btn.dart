@@ -22,7 +22,7 @@ class _TextButtonAppState extends State<TextButtonApp> {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
         splashFactory: NoSplash.splashFactory,
       ),
       onPressed: () {

@@ -87,28 +87,30 @@ class _LoginState extends State<Login> {
                         width: 300,
                         height: 50,
                         textSize: 25,
+                        radius: 25,
                         onPressed: () async {
-                          if(_username.text.isEmpty || _password.text.isEmpty) {
-                            ConfigApp.showNotify(context, MessageType.notice, StatusApp.blankAccount);
-                            return;
-                          }
-
-                          showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return const WaitingProgress();
-                              }
-                          );
-
-                          StatusApp ret = await database.login(_username.text, _password.text);
-                          if(ret == StatusApp.success) {
-                            widget.onLogin();
-                          } else {
-                            ConfigApp.showNotify(context, MessageType.notice, ret);
-                          }
-
-                          Navigator.of(context).pop();
+                          // if(_username.text.isEmpty || _password.text.isEmpty) {
+                          //   ConfigApp.showNotify(context, MessageType.notice, StatusApp.blankAccount);
+                          //   return;
+                          // }
+                          //
+                          // showDialog(
+                          //     context: context,
+                          //     barrierDismissible: false,
+                          //     builder: (BuildContext context) {
+                          //       return const WaitingProgress();
+                          //     }
+                          // );
+                          //
+                          // StatusApp ret = await database.login(_username.text, _password.text);
+                          // if(ret == StatusApp.success) {
+                          //   widget.onLogin();
+                          // } else {
+                          //   ConfigApp.showNotify(context, MessageType.notice, ret);
+                          // }
+                          //
+                          // Navigator.of(context).pop();
+                          widget.onLogin();
                         }),
                     const SizedBox(height: 50),
                     const Text('or login with',
