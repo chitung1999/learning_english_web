@@ -1,43 +1,33 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'login/login.dart';
-import 'home/home.dart';
+import 'package:learning_english_web/data/data_app.dart';
+import 'package:learning_english_web/presentation/page/login_page/login_page.dart';
+import 'package:learning_english_web/server/appwrite_helper.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyDictionary());
+void main() async {
+  await server.initialize();
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => DataApp(),
+      child: const TheApp(),
+    ),
+  );
 }
 
-class MyDictionary extends StatefulWidget {
-  const MyDictionary({super.key});
-
-  @override
-  _MyDictionaryState createState() => _MyDictionaryState();
-}
-
-class _MyDictionaryState extends State<MyDictionary> {
-  bool _isLoginScreen = true;
-
-  void _onLogin() {
-    setState(() {
-      _isLoginScreen = false;
-    });
-  }
-
-  void _onLogout() {
-    setState(() {
-      _isLoginScreen = true;
-    });
-  }
-
+class TheApp extends StatelessWidget {
+  const TheApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: _isLoginScreen
-            ? Login(onLogin: _onLogin)
-            : Home(
-                onLogout: _onLogout,
-              ),
+      title: 'Learning English',
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        },
       ),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }

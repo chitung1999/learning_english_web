@@ -1,11 +1,11 @@
 {
-    "name": "source_dictionary_web",
-    "short_name": "source_dictionary_web",
+    "name": "learning_english_web",
+    "short_name": "learning_english_web",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Dictionary for Web",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

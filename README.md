@@ -1,6 +1,6 @@
-# source_dictionary_web
+# learning_english_web
 
-Dictionary for Web
+A new Flutter project.
 
 ## Getting Started
 
